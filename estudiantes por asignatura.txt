@@ -1,0 +1,61 @@
+CREATE DATABASE Academico
+
+
+	
+	
+create table Persona
+(
+	id SERIAL,
+	nombre varchar(50),
+	apellido varchar(50)
+	
+) 
+
+CREATE TABLE estudiante
+(
+	id SERIAL,
+	carrera varchar(50),
+	curso int
+)
+
+CREATE TABLE docentes
+(
+	id SERIAL,
+	titulo varchar(20),
+)
+
+CREATE TABLE asignatura
+(
+	id SERIAL
+)
+
+INSERT INTO public.persona(
+	id, nombre, apellido, cedula)
+	VALUES (1, 'David', 'Quinaluisa'),
+		   (2, 'Carlos', 'Rojas');
+		   
+INSERT INTO public.estudiante(
+	id, carrera, curso)
+	VALUES (1, 'Desarrollo de software', 2),
+	       (2, 'POO', 2);
+
+INSERT INTO public.docentes(
+	id, titulo)
+	VALUES (1, 'ingeniero'),
+		   (2, 'ingeniero');
+
+SELECT * FROM persona;
+SELECT * FROM estudiante;
+SELECT * FROM docentes;
+
+ALTER TABLE persona
+ADD codigoPersona integer
+
+ALTER TABLE estudiante
+ADD CONSTRAINT fk 
+FOREIGN KEY (codigoPersona)
+REFERENCES persona(id)
+
+--consulta de cuantos estudiantes hay por asignatura
+SELECT id.asignatura, COUNT(estudiante) FROM estudiante as e, asignatura as asig WHERE estudiante = id.asignatura; 
+
